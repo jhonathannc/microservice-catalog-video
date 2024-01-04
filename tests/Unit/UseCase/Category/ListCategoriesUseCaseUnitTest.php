@@ -15,9 +15,7 @@ class ListCategoriesUseCaseUnitTest extends TestCase
 {
   public function test_list_categories_empty(): void
   {
-    $mockPaginate = Mockery::mock(stdClass::class, IPagination::class);
-    $mockPaginate->shouldReceive('items')->andReturn([]);
-    $mockPaginate->shouldReceive('total')->andReturn(0);
+    $mockPaginate = $this->mockPagination();
 
     $mockRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
     $mockRepo->shouldReceive('paginate')->andReturn($mockPaginate);
@@ -29,6 +27,21 @@ class ListCategoriesUseCaseUnitTest extends TestCase
 
     $this->assertCount(0, $response->items);
     $this->assertInstanceOf(ListCategoriesOutputDTO::class, $response);
+  }
+
+  protected function mockPagination()
+  {
+    $mockPaginate = Mockery::mock(stdClass::class, IPagination::class);
+    $mockPaginate->shouldReceive('items')->andReturn([]);
+    $mockPaginate->shouldReceive('total')->andReturn(0);
+    $mockPaginate->shouldReceive('lastPage')->andReturn(0);
+    $mockPaginate->shouldReceive('firstPage')->andReturn(0);
+    $mockPaginate->shouldReceive('perPage')->andReturn(0);
+    $mockPaginate->shouldReceive('to')->andReturn(0);
+    $mockPaginate->shouldReceive('from')->andReturn(0);
+    $mockPaginate->shouldReceive('currentPage')->andReturn(0);
+
+    return $mockPaginate;
   }
 
   protected function tearDown(): void
