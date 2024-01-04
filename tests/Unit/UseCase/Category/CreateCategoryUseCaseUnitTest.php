@@ -53,8 +53,15 @@ class CreateCategoryUseCaseUnitTest extends TestCase
     $useCase = new CreateCategoryUseCase($spyRepo);
     $useCase->execute($mockInputDTO);
 
-    $spyRepo->shouldHaveReceived('insert');
+    $spyRepo->shouldHaveReceived('insert'); // will handle and error if insert method wasn't called
 
+    $this->assertTrue(true); // just assert an test to fix warn message
+  }
+
+  public function tearDown(): void
+  {
     Mockery::close();
+
+    parent::tearDown();
   }
 }
