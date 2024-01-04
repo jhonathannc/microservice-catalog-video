@@ -24,7 +24,13 @@ class ListCategoriesUseCase
 
     return new ListCategoriesOutputDTO(
       total: $categories->total(),
-      items: $categories->items()
+      items: $categories->items(),
+      lastPage: $categories->lastPage(),
+      firstPage: $categories->firstPage(),
+      perPage: $categories->perPage(),
+      to: $categories->to(),
+      from: $categories->from(),
+      currentPage: $categories->currentPage(),
     );
   }
 }
