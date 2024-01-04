@@ -21,6 +21,7 @@ class ListCategoryUseCaseUnitTest extends TestCase
 
     $mockEntity = Mockery::mock(Category::class, [$uuid, $categoryName]);
     $mockEntity->shouldReceive('id')->andReturn($uuid);
+    $mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
     $mockRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
     $mockRepo->shouldReceive('findById')->with($uuid)->andReturn($mockEntity);
@@ -42,6 +43,7 @@ class ListCategoryUseCaseUnitTest extends TestCase
 
     $mockEntity = Mockery::mock(Category::class, [$uuid, $categoryName]);
     $mockEntity->shouldReceive('id')->andReturn($uuid);
+    $mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
     $spyRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
     $spyRepo->shouldReceive('findById')->with($uuid)->andReturn($mockEntity);

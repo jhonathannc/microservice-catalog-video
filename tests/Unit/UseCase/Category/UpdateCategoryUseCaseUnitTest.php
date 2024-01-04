@@ -22,6 +22,7 @@ class UpdateCategoryUseCaseUnitTest extends TestCase
 
     $mockEntity = Mockery::mock(CategoryEntity::class, [$id, $name, $description]);
     $mockEntity->shouldReceive('update');
+    $mockEntity->shouldReceive('createdAt')->andReturn(date('Y-m-d H:i:s'));
 
     $mockRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
     $mockRepo->shouldReceive('findById')->andReturn($mockEntity);
