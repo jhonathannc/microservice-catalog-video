@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\UseCase\Category;
 
-use Core\Domain\Entity\Category;
 use Core\Domain\Repository\ICategoryRepository;
 use Core\UseCase\Category\DeleteCategoryUseCase;
 use Core\UseCase\Category\DTO\CategoryInputDTO;
