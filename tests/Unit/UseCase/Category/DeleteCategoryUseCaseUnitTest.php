@@ -28,6 +28,15 @@ class DeleteCategoryUseCaseUnitTest extends TestCase
 
     $this->assertInstanceOf(DeleteCategoryOutputDTO::class, $response);
     $this->assertTrue($response->success);
+
+    // Spies
+    $spyRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
+    $spyRepo->shouldReceive('delete')->andReturn(true);
+
+    $useCase = new DeleteCategoryUseCase($spyRepo);
+    $useCase->execute($mockInputDto);
+
+    $spyRepo->shouldHaveReceived('delete');
   }
 
   public function tearDown(): void
