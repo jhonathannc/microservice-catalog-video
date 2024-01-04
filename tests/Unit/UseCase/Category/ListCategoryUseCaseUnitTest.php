@@ -34,4 +34,32 @@ class ListCategoryUseCaseUnitTest extends TestCase
     $this->assertEquals($categoryName, $response->name);
     $this->assertEquals($uuid, $response->id);
   }
+
+  public function test_get_by_id_spies(): void
+  {
+    $uuid = (string) Uuid::uuid4()->toString();
+    $categoryName = 'New Category';
+
+    $mockEntity = Mockery::mock(Category::class, [$uuid, $categoryName]);
+    $mockEntity->shouldReceive('id')->andReturn($uuid);
+
+    $spyRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
+    $spyRepo->shouldReceive('findById')->with($uuid)->andReturn($mockEntity);
+
+    $mockInputDto = Mockery::mock(CategoryInputDTO::class, [$uuid]);
+
+    $useCase = new ListCategoryUseCase($spyRepo);
+    $useCase->execute($mockInputDto);
+
+    $spyRepo->shouldHaveReceived('findById');
+
+    $this->assertTrue(true);
+  }
+
+  protected function tearDown(): void
+  {
+    Mockery::close();
+
+    parent::tearDown();
+  }
 }
