@@ -27,6 +27,14 @@ class ListCategoriesUseCaseUnitTest extends TestCase
 
     $this->assertCount(0, $response->items);
     $this->assertInstanceOf(ListCategoriesOutputDTO::class, $response);
+
+    //spies
+    $spyRepo = Mockery::mock(stdClass::class, ICategoryRepository::class);
+    $spyRepo->shouldReceive('paginate')->andReturn($mockPaginate);
+    $useCase = new ListCategoriesUseCase($spyRepo);
+    $useCase->execute($mockInputDto);
+
+    $spyRepo->shouldHaveReceived('paginate');
   }
 
   protected function mockPagination()
