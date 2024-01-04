@@ -4,8 +4,8 @@ namespace Core\UseCase\Category;
 
 use Core\Domain\Entity\Category;
 use Core\Domain\Repository\ICategoryRepository;
-use Core\UseCase\Category\DTO\CategoryCreateInputDTO;
-use Core\UseCase\Category\DTO\CategoryCreateOutputDTO;
+use Core\UseCase\Category\DTO\CreateCategory\CategoryCreateInputDTO;
+use Core\UseCase\Category\DTO\CreateCategory\CategoryCreateOutputDTO;
 
 class CreateCategoryUseCase
 {
@@ -16,7 +16,7 @@ class CreateCategoryUseCase
     $this->repository = $repository;
   }
 
-  public function execute(CategoryCreateInputDTO $input)
+  public function execute(CategoryCreateInputDTO $input): CategoryCreateOutputDTO
   {
     $category = new Category(
       name: $input->name,
