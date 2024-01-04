@@ -36,4 +36,25 @@ class CreateCategoryUseCaseUnitTest extends TestCase
 
     Mockery::close();
   }
+
+  public function test_create_new_category_spies(): void
+  {
+    $uuid = (string) Uuid::uuid4()->toString();
+    $categoryName = 'New category';
+
+    $mockEntity = Mockery::mock(Category::class, [$uuid, $categoryName]);
+    $mockEntity->shouldReceive('id')->andReturn($uuid);
+
+    $spyRepo = Mockery::spy(stdClass::class, ICategoryRepository::class);
+    $spyRepo->shouldReceive('insert')->andReturn($mockEntity);
+
+    $mockInputDTO = Mockery::mock(CategoryCreateInputDTO::class, [$categoryName]);
+
+    $useCase = new CreateCategoryUseCase($spyRepo);
+    $useCase->execute($mockInputDTO);
+
+    $spyRepo->shouldHaveReceived('insert');
+
+    Mockery::close();
+  }
 }
