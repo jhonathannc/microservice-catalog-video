@@ -17,7 +17,7 @@ interface ICategoryRepository
     string $order = 'DESC',
     int $page = 1,
     int $perPage = 15
-  ): array;
+  ): IPagination;
 
   public function update(Category $category): Category;
 
