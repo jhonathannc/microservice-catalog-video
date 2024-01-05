@@ -12,6 +12,7 @@ The image below shows how this project was built.
 ### C4 Diagram
 
 This project is one part (service) of a project called "Codeflix". A project based on netflix and using a strong architecture, with microservices, message streaming, authentication with keycloak and others technologies as seen below.
+
 ![c4-diagram](./docs/assets/C4-Diagram.png "C4 Diagram")
 
 # License
