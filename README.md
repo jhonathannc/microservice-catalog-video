@@ -1,6 +1,6 @@
 # About
 
-The purpose of this project is create a service about Video's catalog, using Clean Architecture, TDD, SOLID, and others patterns, and following the course on [FullCycle][fullcycle] school.
+The purpose of this project is create a service about Video's catalog, using Clean Architecture, TDD, DDD, SOLID, and others patterns, and following the course on [FullCycle][fullcycle] school.
 
 The image below shows how this project was built.
 
